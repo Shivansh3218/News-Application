@@ -29,7 +29,6 @@ function News() {
           `https://newsapi.org/v2/everything?q=${search}&page=${page}&apiKey=7568337b00bd4c7ba1138802145d183e`
         )
         .then((response) => {
-          console.log(search);
           setData([response.data.articles]);
         });
     }, [search, page]);
@@ -42,7 +41,7 @@ let pageArr= [1,2,3,4,5]
 
   return (
     <React.Fragment>
-      <Header handleTheme={handleTheme} />
+      <Header handleTheme={handleTheme} pageTheme={pageTheme} />
       <Paper
         style={{
           ...pageTheme,

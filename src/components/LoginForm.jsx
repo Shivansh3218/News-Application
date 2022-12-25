@@ -1,13 +1,25 @@
 import React from "react";
+import {useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import Typography from "@mui/material/Typography";
 import bgVid from '../Assets/loginVideo.mp4'
 import '../components/css/LoginForm.css'
 
 const LoginForm = () => {
+  
+  let navigate= useNavigate()
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+   let userData=  JSON.parse(localStorage.getItem(('userData')))
+    userData.filter((item)=>{
+      if(item.email===values['username']&& item.password===values['password']){
+         navigate('/MainNews')
+      } 
+      else alert('Invalid Email or Password.  if you are not registered with us, sign up to continue')
+    
+    })
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -34,7 +46,7 @@ const LoginForm = () => {
       Login to get latest news
     </Typography>
       <Form.Item
-        label="Username"
+        label="Email/Username"
         name="username"
         rules={[
           {
@@ -47,7 +59,7 @@ const LoginForm = () => {
       </Form.Item>
 
       <Form.Item
-        label="Password"
+        label="User Password"
         name="password"
         rules={[
           {
@@ -77,7 +89,17 @@ const LoginForm = () => {
         }}
       >
         <Button type="primary" htmlType="submit">
-          Submit
+          Login
+        </Button>
+      </Form.Item>
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" style={{color:'white'}} onClick={()=>navigate('/SignUp')} htmlType="submit">
+          Not a user ? Click here to sign Up 
         </Button>
       </Form.Item>
     </Form>

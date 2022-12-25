@@ -2,49 +2,13 @@ import * as React from 'react';
 import { useContext } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import{ AppBar , Switch, Box, Toolbar,IconButton,Typography, InputBase} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 
 import { SearchContext } from './Contexts/SearchProvider';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
+import { AudioOutlined } from '@ant-design/icons';
+import { Input, Space } from 'antd';
+const { Search } = Input;
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
 
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -95,23 +59,16 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   }));
   
 
-export default function Header({handleTheme}) {
+export default function Header({handleTheme, pageTheme}) {
  
 const {search,handleSearch}= useContext(SearchContext)
     
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,  }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+        
+        <MaterialUISwitch  onClick={handleTheme} />
           <Typography
             variant="h6"
             noWrap
@@ -120,20 +77,18 @@ const {search,handleSearch}= useContext(SearchContext)
           >
             NEWS APPLICATION
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              value={search}
-              onChange={handleSearch}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+
+          <Search
+      placeholder="input search text"
+      allowClear
+      value={search}
+      enterButton="Search"
+      size="large"
+      onSearch={handleSearch}
+    />
+  
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <MaterialUISwitch  onClick={handleTheme} />
           </Box>
         </Toolbar>
       </AppBar>
