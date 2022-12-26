@@ -8,6 +8,9 @@ import { Button, Paper, Skeleton } from "@mui/material";
 import { SearchContext } from "./Contexts/SearchProvider";
 import { Box} from "@mui/system";
 import { ColorRing } from "react-loader-spinner";
+import logo from '../Assets/logo.png'
+import Search from "antd/es/transfer/search";
+import Navbar from "./Navbar";
 
 function News() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -26,7 +29,9 @@ function News() {
       console.log(page, "coming from axios");
       axios
         .get(
-          `https://newsapi.org/v2/everything?q=${search}&page=${page}&apiKey=7568337b00bd4c7ba1138802145d183e`
+          // `https://newsapi.org/v2/everything?q=${search}&page=${page}&apiKey=ea14c121ce034b56b4ae40988411c39a`
+          `https://newsapi.org/v2/everything?q=${search}&page=${page}&apiKey=ab3256b8df06417da840cd79b7e986f8`
+          // `https://newsapi.org/v2/everything?q=${search}&page=${page}&apiKey=7568337b00bd4c7ba1138802145d183e`
         )
         .then((response) => {
           setData([response.data.articles]);
@@ -41,7 +46,8 @@ let pageArr= [1,2,3,4,5]
 
   return (
     <React.Fragment>
-      <Header handleTheme={handleTheme} pageTheme={pageTheme} />
+      <img style={{width:'50%', height:'1%', marginLeft:'25%'}} src={logo} alt="" />
+      <Navbar handleTheme={handleTheme} pageTheme={pageTheme} />
       <Paper
         style={{
           ...pageTheme,

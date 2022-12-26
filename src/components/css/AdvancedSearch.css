@@ -1,0 +1,95 @@
+#headingTop{
+    font-size: xx-large;
+    margin: 2rem;
+}
+#catogoryCheckboxes, #regionCheckboxes{
+display: flex;
+flex-direction: column;
+font-size: larger;
+ margin: 3rem;
+}
+#hero{
+    margin-left: 10%;
+}
+input{
+    font-size: large;
+    margin: 2rem;
+    border-radius: 1rem;
+    padding: 10px;
+}
+.main{
+    width: 90%;
+    overflow: hidden;
+    margin-left: 2rem;
+}
+label{
+    font-size: x-large; 
+     width: 50%; 
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+ .checkbox, .radio{
+    width: 3rem;
+    margin-left: 2rem;
+    height: 3rem;
+}
+hr{
+    width: 100%;
+}
+.regionHeading, .catogoryHeading, .languageHeading{
+    color: rgb(11, 11, 51);
+    font-size: x-large;
+}
+#wrapper_filters{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+#searchbtn{
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    padding: 10px;
+    width: 100px    ;
+    border-radius: 10px;
+    position: absolute;
+    right: 10%;
+    margin-bottom: 1000px;
+}
+
+
+@media screen and (max-width: 800px) {
+    label{
+        font-size: large;
+        width: 30%;
+        display: flex;
+        align-items: baseline;
+    }
+
+    #wrapper_filters{
+        flex-direction: column;
+        justify-content: space-around;
+    }
+  }
+@media screen and (max-width: 500px) {
+    label{
+        font-size: large;
+        width: 30%;
+        display: flex;
+        margin: '0';
+        align-items: baseline;
+    }
+
+    input{
+        font-size: small;
+        border-radius: 5px;
+    }
+    #wrapper_filters{
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    #dateSelector{
+        width: 100px;
+    }
+  } 

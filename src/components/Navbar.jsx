@@ -1,11 +1,14 @@
-import * as React from 'react';
+import React, { useState } from "react";
+import "../components/css/Navbar.css";
+
+import { GiHamburgerMenu } from "react-icons/gi";
 import { useContext } from "react";
 import { styled, alpha } from '@mui/material/styles';
 import{ AppBar , Switch, Box, Toolbar,IconButton,Typography, InputBase} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+
+import { NavLink } from "react-router-dom";
 import { SearchContext } from './Contexts/SearchProvider';
-import  { useState } from 'react';
-import { Button, Drawer } from 'antd';
+
 import { AudioOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 const { Search } = Input;
@@ -60,32 +63,71 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   }));
   
 
-export default function Header({handleTheme, pageTheme}) {
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
 
- 
-const {search,handleSearch}= useContext(SearchContext)
+const Navbar = ({handleTheme, pageTheme}) => {
     
+const {search,handleSearch}= useContext(SearchContext)
+  const [showMediaIcons, setShowMediaIcons] = useState(false);
   return (
-    <Box sx={{ flexGrow: 1,  }}>
-      <AppBar position="static">
-        <Toolbar sx={{display:'flex',justifyContent:'space-between'}}>
-       <Typography variant='h3'>
-        Developer's  News 
-       </Typography>
-        <MenuIcon onClick={showDrawer} sx={{fontSize:'4rem', cursor:'pointer'}}/>
-     
-      <Drawer title="Options" placement="right" onClose={onClose} open={open}>
+    <>
+      <nav className="main-nav" >
+        {/* 1st logo part  */}
+        <div className="logo">
+        <Search
+      placeholder="input search text"
+      allowClear
+      value={search}
+      enterButton="Search"
+      size="large"
+      onChange={handleSearch}
+    />
+        </div>
 
-      </Drawer>
-        </Toolbar>
-      </AppBar>
-    </Box>
+        {/* 2nd menu part  */}
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">Entertainment</NavLink>
+            </li>
+            <li>
+              <NavLink to="/service">Technologies</NavLink>
+            </li>
+            <li>
+              <NavLink to="/Sports">Health</NavLink>
+            </li>
+            <li>
+              <NavLink to="/">Advanced Search</NavLink>
+            </li>
+          </ul>
+    
+        </div>
+
+        {/* 3rd social media links */}
+        <div className="social-media">
+            
+        <MaterialUISwitch sx={{' @media (min-width: 1000px)':{marginTop:'10%', marginLeft:'20%'}}} onClick={handleTheme} />
+          {/* hamburget menu start  */}
+          <div className="hamburger-menu">
+            <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+              <GiHamburgerMenu />
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* hero section  */}
+      {/* <section className="hero-section">
+        <p>Welcome to </p>
+        <h1>Thapa Technical</h1>
+      </section> */}
+    </>
   );
-}
+};
+
+export default Navbar;
