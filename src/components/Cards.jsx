@@ -1,20 +1,24 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Like from "./Like";
-import { red } from "@mui/material/colors";
+import {
+  ExpandMoreIcon,
+  KeyboardArrowDownIcon,
+  KeyboardArrowUpIcon,
+} from "@mui/icons-material";
+import {
+  styled,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Collapse,
+  Avatar,
+  IconButton,
+  Typography,
+  red,
+} from "@mui/material";
 
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Like from "./Like";
 
 export default function Cards({ item, pageTheme }) {
   const ExpandMore = styled((props) => {
@@ -90,7 +94,9 @@ export default function Cards({ item, pageTheme }) {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              {item.content!==null?item.content.slice(0, 200):item.content}
+              {item.content !== null
+                ? item.content.slice(0, 200)
+                : item.content}
               <a href={item.url} target="_blank" rel="noreferrer">
                 read more
               </a>

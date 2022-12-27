@@ -3,13 +3,11 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "./Contexts/ContextTheme";
 import Cards from "./Cards";
-import Header from "./Header";
-import { Button, Paper, Skeleton } from "@mui/material";
+import { Button, Paper,  } from "@mui/material";
 import { SearchContext } from "./Contexts/SearchProvider";
 import { Box} from "@mui/system";
 import { ColorRing } from "react-loader-spinner";
 import logo from '../Assets/logo.png'
-import Search from "antd/es/transfer/search";
 import Navbar from "./Navbar";
 
 function News() {
@@ -26,7 +24,6 @@ function News() {
     count === 0 ? setPageTheme(theme.dark) : setPageTheme(theme.light);
   };
     useEffect(() => {
-      console.log(page, search, "coming from axios");
       axios
         .get(
           `https://newsapi.org/v2/everything?q=${search}&page=${page}&from=2022-12-26&to=2022-12-26&sortBy=popularity&apiKey=ab3256b8df06417da840cd79b7e986f8

@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { useContext } from "react";
-import { styled, alpha } from '@mui/material/styles';
-import{ AppBar , Switch, Box, Toolbar,IconButton,Typography, InputBase} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import{ AppBar , Switch, Box, Toolbar,Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { SearchContext } from './Contexts/SearchProvider';
 import  { useState } from 'react';
-import { Button, Drawer } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
-import { Input, Space } from 'antd';
+import {  Drawer } from 'antd';
+
+import { SearchContext } from './Contexts/SearchProvider';
 
 import "../components/css/Header.css";
-const { Search } = Input;
+
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,

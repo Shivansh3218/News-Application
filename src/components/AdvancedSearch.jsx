@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
-import Header from "./Header";
-
-import "../components/css/AdvancedSearch.css";
+import React, { useState, useEffect, useContext } from "react"
 import axios from "axios";
+import { Paper } from "@mui/material";
 
+import Header from "./Header";
+import "../components/css/AdvancedSearch.css";
 import { ThemeContext } from "./Contexts/ContextTheme";
 import Cards from "./Cards";
-import { Paper } from "@mui/material";
+
 export default function AdvancedSearch() {
+  
   const [datas, setData] = useState([]);
   const [count, setCount] = useState(0);
   const { theme, setTheme } = useContext(ThemeContext);
@@ -35,7 +36,6 @@ export default function AdvancedSearch() {
     });
   };
   useEffect(() => {
-    console.log(searched,'searched');
     axios
       .get(
         `https://newsapi.org/v2/everything?q=${searched["keyword"]}&from=${searched["from"]}&to=${searched["to"]}&&language=${searched['language']}sortBy=popularity&apiKey=ab3256b8df06417da840cd79b7e986f8`
