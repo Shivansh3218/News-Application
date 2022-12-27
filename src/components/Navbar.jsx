@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import "../components/css/Navbar.css";
-
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useContext } from "react";
-import { styled, alpha } from '@mui/material/styles';
-import{ AppBar , Switch, Box, Toolbar,IconButton,Typography, InputBase} from '@mui/material';
+import{ Switch,styled} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
-import { NavLink } from "react-router-dom";
 import { SearchContext } from './Contexts/SearchProvider';
+import Typography from '@mui/material/Typography'
+import { Input } from 'antd';
+import { Button, Drawer, Radio, Space } from 'antd';
 
-import { AudioOutlined } from '@ant-design/icons';
-import { Input, Space } from 'antd';
+
 const { Search } = Input;
-
-
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -68,11 +66,37 @@ const Navbar = ({handleTheme, pageTheme}) => {
     
 const {search,handleSearch}= useContext(SearchContext)
   const [showMediaIcons, setShowMediaIcons] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState('left');
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+  const onChange = (e) => {
+    setPlacement(e.target.value);
+  };
+
+let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
+
   return (
     <>
-      <nav className="main-nav" >
+      <nav className="main-nav" style={{...pageTheme}}>
         {/* 1st logo part  */}
         <div className="logo">
+            
+        <MenuIcon onClick={showDrawer} sx={{fontSize:'4rem', cursor:'pointer'}}/>
+
+      <Drawer style={{...pageTheme}} placement="left" onClose={onClose} open={open}>
+        <Typography variant="h4">
+            Welcome <span>{loggedInUser.Name}</span>
+        </Typography>
+        <div className="logOut_btn" style={{position:'absolute', bottom:'5%', width:'80%'}}>
+          <a href="/"><button className='logutButton'>Logout</button></a>
+      </div>
+      </Drawer>
         <Search
       placeholder="input search text"
       allowClear
@@ -87,22 +111,19 @@ const {search,handleSearch}= useContext(SearchContext)
         <div
           className={
             showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-          }>
+          } style={{...pageTheme}}>
           <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
+            <li >
+              <a style={{...pageTheme}} href="/MainNews">Home</a>
             </li>
             <li>
-              <NavLink to="/about">Entertainment</NavLink>
+              <a style={{...pageTheme}} href="/Entertainment">Entertainment</a>
             </li>
             <li>
-              <NavLink to="/service">Technologies</NavLink>
+              <a style={{...pageTheme}} href="/Sports">Sports</a>
             </li>
             <li>
-              <NavLink to="/Sports">Health</NavLink>
-            </li>
-            <li>
-              <NavLink to="/">Advanced Search</NavLink>
+              <a style={{...pageTheme}} href="/AdvancedSearch">Advanced Search</a>
             </li>
           </ul>
     
@@ -120,12 +141,6 @@ const {search,handleSearch}= useContext(SearchContext)
           </div>
         </div>
       </nav>
-
-      {/* hero section  */}
-      {/* <section className="hero-section">
-        <p>Welcome to </p>
-        <h1>Thapa Technical</h1>
-      </section> */}
     </>
   );
 };

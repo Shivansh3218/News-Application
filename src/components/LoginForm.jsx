@@ -13,6 +13,7 @@ const LoginForm = () => {
    let userData=  JSON.parse(localStorage.getItem(('userData')))
     userData.filter((item)=>{
       if(item.email===values['username']&& item.password===values['password']){
+        localStorage.setItem('loggedInUser',JSON.stringify(item))
          navigate('/MainNews')
       } 
       else alert('Invalid Email or Password.  if you are not registered with us, sign up to continue')
@@ -30,7 +31,7 @@ const LoginForm = () => {
       <source src={bgVid} type="video/mp4"/>
     </video>
     <Typography variant="h3" gutterBottom textAlign='center' marginTop='2rem' color='white'>
-      Welcome to The News App
+      Welcome to The Developer's News Application
     </Typography>
     <Form
       name="basic"
@@ -42,11 +43,12 @@ const LoginForm = () => {
       autoComplete="off"
       style={{width:'400px', margin:'auto'}}
     >
-     <Typography variant="h5" gutterBottom textAlign='center' marginTop='2rem' color='white'>
-      Login to get latest news
+     <Typography variant="h3" gutterBottom textAlign='center'style={{marginBottom:'10rem'}} marginTop='2rem' color='white'>
+      Login to get latest news world wide
     </Typography>
       <Form.Item
         label="Email/Username"
+        width='auto'
         name="username"
         rules={[
           {
@@ -57,9 +59,9 @@ const LoginForm = () => {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         label="User Password"
+        style={{width:'auto'}}
         name="password"
         rules={[
           {

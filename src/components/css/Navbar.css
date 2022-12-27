@@ -28,15 +28,14 @@ li {
   height: 10rem;
   display: grid;
   grid-template-columns: 10rem 1fr 2fr 1fr 10rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  border-radius: 0;
 }
 
 .logo {
-  display: grid;
-  /* background-color: #3b5998; */
-  grid-column: 2/3;
-  justify-content: start;
+  display: flex;
+  width: 40rem;
+  justify-content: space-around;
+margin-left: 1rem;
   align-items: center;
 }
 
@@ -76,9 +75,6 @@ li {
   text-align: right;
 }
 
-.social-media ul li:first-child {
-  grid-column: 2/3;
-}
 
 /* ----------- Grid part ends ----------------- */
 

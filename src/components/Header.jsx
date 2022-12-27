@@ -8,9 +8,9 @@ import  { useState } from 'react';
 import { Button, Drawer } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
+
+import "../components/css/Header.css";
 const { Search } = Input;
-
-
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -61,6 +61,9 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   
 
 export default function Header({handleTheme, pageTheme}) {
+
+
+
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -76,13 +79,31 @@ const {search,handleSearch}= useContext(SearchContext)
     <Box sx={{ flexGrow: 1,  }}>
       <AppBar position="static">
         <Toolbar sx={{display:'flex',justifyContent:'space-between'}}>
+        <MaterialUISwitch onClick={handleTheme}  />
        <Typography variant='h3'>
         Developer's  News 
        </Typography>
         <MenuIcon onClick={showDrawer} sx={{fontSize:'4rem', cursor:'pointer'}}/>
      
-      <Drawer title="Options" placement="right" onClose={onClose} open={open}>
-
+      <Drawer style={{...pageTheme}}  placement="right" onClose={onClose} open={open}>
+     
+      <ul>
+            <li >
+             <a style={{...pageTheme}} href="/MainNews"><button className='nav-btn'>Home</button> </a>
+            </li>
+            <li>
+              <a style={{...pageTheme}} href="/Entertainment"><button className='nav-btn'>Entertainment</button> </a>
+            </li>
+            <li>
+              <a style={{...pageTheme}} href="/Sports"><button className='nav-btn'>Sports</button> </a>
+            </li>
+            <li>
+              <a style={{...pageTheme}} href="/AdvancedSearch"> <button className='nav-btn'>Advanced Search</button> </a>
+            </li>
+          </ul>
+          <div className="logOut_btn" style={{marginTop:'90%'}}>
+          <a href="/"><button className='logutButton'>Logout</button></a>
+          </div>
       </Drawer>
         </Toolbar>
       </AppBar>

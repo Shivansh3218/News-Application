@@ -1,9 +1,21 @@
 import React from "react";
 import { Button, Form, Input, Select } from "antd";
 import Typography from "@mui/material/Typography";
+import {
+    Checkbox,
+    Col,
+    InputNumber,
+    Radio,
+    Rate,
+    Row,
+    Slider,
+    Switch,
+    Upload,
+  } from 'antd';
 
 import bgVid from '../Assets/loginVideo.mp4'
 import { useNavigate } from "react-router-dom";
+import { UploadOutlined } from "@mui/icons-material";
 
 const { Option } = Select;
 const formItemLayout = {
@@ -63,6 +75,15 @@ const SignUp = () => {
     </Form.Item>
   );
 
+  const normFile = (e) => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e?.fileList;
+  };
+  
+
   return (
     <div style={{width: "80%", height:'100vh' }}>
           <video autoPlay loop muted id="myVid">
@@ -96,7 +117,7 @@ const SignUp = () => {
           rules={[
             {
               required: true,
-              message: "Please input your nickname!",
+              message: "Please input your name!",
               whitespace: true,
             },
           ]}
@@ -177,7 +198,17 @@ const SignUp = () => {
             }}
           />
         </Form.Item>
-
+        <Form.Item
+        name="Upload"
+        label="Upload a profile picture"
+        valuePropName="fileList"
+        getValueFromEvent={normFile}
+        extra="Select a profile Picture"
+      >
+        <Upload name="logo" action="/upload.do" listType="picture">
+          <Button icon={<UploadOutlined/>}>Click to upload</Button>
+        </Upload>
+      </Form.Item>
         <Form.Item
           name="gender"
           label="Gender"

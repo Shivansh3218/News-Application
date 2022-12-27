@@ -12,7 +12,7 @@ import logo from '../Assets/logo.png'
 import Search from "antd/es/transfer/search";
 import Navbar from "./Navbar";
 
-function News() {
+function Sports() {
   const { theme, setTheme } = useContext(ThemeContext);
   const [pageTheme, setPageTheme] = useState(theme.light);
   const [datas, setData] = useState([]);
@@ -26,11 +26,10 @@ function News() {
     count === 0 ? setPageTheme(theme.dark) : setPageTheme(theme.light);
   };
     useEffect(() => {
-      console.log(page, search, "coming from axios");
+      console.log(page, "coming from axios");
       axios
         .get(
-          `https://newsapi.org/v2/everything?q=${search}&page=${page}&from=2022-12-26&to=2022-12-26&sortBy=popularity&apiKey=ab3256b8df06417da840cd79b7e986f8
-          `
+         `https://newsapi.org/v2/top-headlines?country=de&category=entertainment&apiKey=ab3256b8df06417da840cd79b7e986f8`
         )
         .then((response) => {
           setData([response.data.articles]);
@@ -45,9 +44,7 @@ let pageArr= [1,2,3,4,5]
 
   return (
     <React.Fragment>
-      <div className="image" style={{...pageTheme}}>
       <img style={{width:'50%', height:'1%', marginLeft:'25%'}} src={logo} alt="" />
-        </div>
       <Navbar handleTheme={handleTheme} pageTheme={pageTheme} />
       <Paper
         style={{
@@ -74,9 +71,7 @@ let pageArr= [1,2,3,4,5]
      }
           
       </Paper>
-      <Box sx={{display:'flex',justifyContent:'space-around',width:'50%', margin:'auto', '@media(max-width:800px)':{
-        justifyContent:'center'
-      }}}>
+      <Box sx={{display:'flex',justifyContent:'space-around', margin:'1%'}}>
       <Button variant="contained" onClick={handlePrev}>Prev</Button> 
       {pageArr.map((pageNo)=>{
         return <Button onClick={()=>setPage(pageNo)} variant="text">{pageNo}</Button>
@@ -87,4 +82,4 @@ let pageArr= [1,2,3,4,5]
   );
 }
 
-export default News;
+export default Sports;

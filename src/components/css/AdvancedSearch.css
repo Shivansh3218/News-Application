@@ -17,14 +17,23 @@ input{
     border-radius: 1rem;
     padding: 10px;
 }
+#language_select, #sort_select{
+    color:'red';
+    font-size: 20px;
+    margin-top: 1rem;
+}
+.option_lang,.option_sort{
+    color:'red';
+    font-size:'x-large';
+    border-radius: 10px;
+}
 .main{
-    width: 90%;
+    width: 100%;
     overflow: hidden;
-    margin-left: 2rem;
 }
 label{
     font-size: x-large; 
-     width: 50%; 
+     width: auto; 
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -37,14 +46,15 @@ label{
 hr{
     width: 100%;
 }
-.regionHeading, .catogoryHeading, .languageHeading{
+.regionHeading, .categoryHeading, .languageHeading{
     color: rgb(11, 11, 51);
     font-size: x-large;
 }
 #wrapper_filters{
-    display: flex;
+    /* display: flex;
     align-items: baseline;
-    justify-content: space-around;
+    justify-content: space-around; */
+    margin-left: 10%
 }
 #searchbtn{
     color: white;

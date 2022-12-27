@@ -12,7 +12,7 @@ function Like({url}) {
     <div>
         {
             count===0?
-            <FavoriteIcon id = {url}  onClick={handleClick}/>:
+            <FavoriteIcon id = {url}style={{color:'green'}}  onClick={handleClick}/>:
             <FavoriteIcon id = {url} style={{color:'red'}} onClick={handleClick}/>
         }
      

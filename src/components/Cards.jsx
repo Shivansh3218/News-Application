@@ -90,7 +90,7 @@ export default function Cards({ item, pageTheme }) {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              {item.content.slice(0, 200)}
+              {item.content!==null?item.content.slice(0, 200):item.content}
               <a href={item.url} target="_blank" rel="noreferrer">
                 read more
               </a>
