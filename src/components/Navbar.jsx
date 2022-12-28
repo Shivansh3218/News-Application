@@ -104,14 +104,7 @@ const Navbar = ({ handleTheme, pageTheme }) => {
               </a>
             </div>
           </Drawer>
-          <Search
-            placeholder="input search text"
-            allowClear
-            value={search}
-            enterButton="Search"
-            size="large"
-            onChange={handleSearch}
-          />
+          
         </div>
 
         {/* 2nd menu part  */}
@@ -121,6 +114,14 @@ const Navbar = ({ handleTheme, pageTheme }) => {
           }
           style={{ ...pageTheme }}
         >
+          <Search
+            placeholder="input search text"
+            allowClear
+            value={search}
+            enterButton="Search"
+            size="large"
+            onChange={handleSearch}
+          />
           <ul>
             <li>
               <a style={{ ...pageTheme }} href="/MainNews">

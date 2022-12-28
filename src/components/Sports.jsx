@@ -72,7 +72,15 @@ function Sports() {
         )}
       </Paper>
       <Box
-        sx={{ display: "flex", justifyContent: "space-around", margin: "1%" }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          margin: "1%",
+          paddingBottom: "2rem",
+          "@media(max-width:800px)": {
+            justifyContent: "center",
+          },
+        }}
       >
         <Button variant="contained" onClick={handlePrev}>
           Prev
