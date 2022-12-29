@@ -84,7 +84,7 @@ const {search,handleSearch}= useContext(SearchContext)
        </Typography>
         <MenuIcon onClick={showDrawer} sx={{fontSize:'4rem', cursor:'pointer'}}/>
      
-      <Drawer style={{...pageTheme}}  placement="right" onClose={onClose} open={open}>
+      <Drawer style={{...pageTheme}} title="Check out our other pages" placement="right" onClose={onClose} open={open}>
      
       <ul>
             <li >

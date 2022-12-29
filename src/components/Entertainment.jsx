@@ -26,7 +26,7 @@ function Entertainment() {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/top-headlines?country=de&category=entertainment&apiKey=ab3256b8df06417da840cd79b7e986f8`
+        `https://newsapi.org/v2/top-headlines?country=de&category=entertainment&q=${search}&apiKey=ab3256b8df06417da840cd79b7e986f8`
       )
       .then((response) => {
         setData([response.data.articles]);
@@ -86,7 +86,7 @@ function Entertainment() {
         </Button>
         {pageArr.map((pageNo) => {
           return (
-            <Button onClick={() => setPage(pageNo)} variant="text">
+            <Button onClick={() => setPage(pageNo)} style={{fontSize:'large'}} variant="text">
               {pageNo}
             </Button>
           );

@@ -89,6 +89,7 @@ const Navbar = ({ handleTheme, pageTheme }) => {
           <Drawer
             style={{ ...pageTheme }}
             placement="left"
+          
             onClose={onClose}
             open={open}
           >

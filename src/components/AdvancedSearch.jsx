@@ -15,7 +15,7 @@ export default function AdvancedSearch() {
   const [pageTheme, setPageTheme] = useState(theme.light);
 
   let [search, setSearch] = useState({
-    keyword: "everything",
+    keyword: "bitcoin",
     from: "2022-12-27",
     to: "2022-12-27",
     region: "in",
@@ -23,22 +23,21 @@ export default function AdvancedSearch() {
     language: "all",
   });
   
-  const [searched, setSearched] = useState({...search});
+  const [searched, setSearched] = useState({ keyword: "bitcoin",
+  from: "2022-12-27",
+  to: "2022-12-27",
+  region: "in",
+  category: "all",});
   
   const handleSearch = () => {
     setSearched({ ...search });
-    setSearch({
-      keyword: "everything",
-      from: "2022-12-27",
-      to: "2022-12-27",
-      region: "in",
-      language: "ru",
-    });
   };
   useEffect(() => {
+    console.log(searched, 'searcheddddddddd')
+    console.log(search, 'search')
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${searched["keyword"]}&from=${searched["from"]}&to=${searched["to"]}&&language=${searched['language']}sortBy=popularity&apiKey=ab3256b8df06417da840cd79b7e986f8`
+        `https://newsapi.org/v2/everything?q=${searched['keyword']}&from=${searched["from"]}&to=${searched["to"]}country=uslanguage=${searched['language']}&apiKey=ab3256b8df06417da840cd79b7e986f8`
       )
       .then((response) => {
         setData([response.data.articles]);
@@ -60,13 +59,13 @@ export default function AdvancedSearch() {
   ];
 
   let languageArr = [
+    ["English", "all"],
     ["Spanish", "ar"],
     ["French", "fr"],
     ["Italian", "it"],
     ["Portuguese", "pt"],
-    ["Russian", "ru"],
-    ["English", "all"]
-  ];
+    ["Russian", "ru"]
+    ];
 
   document.getElementById("root").style = { ...pageTheme };
 
@@ -74,21 +73,10 @@ export default function AdvancedSearch() {
     <>
       <Header handleTheme={handleTheme} pageTheme={pageTheme} />
 
-      <section className="main" style={{ ...pageTheme, height:'100vh' }}>
+      <section className="main" style={{ ...pageTheme }}>
         <h1 id="headingTop">ADVANCED SEARCH</h1>
         <div style={{ ...pageTheme }} id="searchBtn-container">
-          <button
-            style={{
-              ...pageTheme,
-              backgroundColor: "green",
-              fontSize: "1.5rem",
-              color: "white",
-            }}
-            id="searchbtn"
-            onClick={handleSearch}
-          >
-            Search
-          </button>
+        
         </div>
         <div id="hero">
           <label>
@@ -97,6 +85,7 @@ export default function AdvancedSearch() {
               type="text"
               required
               id="inputSearch"
+              onChange={ (e)=>setSearch({ ...search, keyword: e.target.value })}
               placeholder="Type Something"
             />
           </label>
@@ -122,14 +111,43 @@ export default function AdvancedSearch() {
           <div id="language_radios">
             <h1  style={{...pageTheme}}  className="languageHeading">Select Language</h1>
             <hr />
-            <select name="language" id="language_select">
+            <select onChange={(e)=>{
+                console.log(e.target.value, 'language value')
+                setSearch({...search, language:e.target.value})
+               }} name="language" id="language_select">
             {languageArr.map((item) => {
               return (
-               <option className="option_lang" style={{}} value={item[1]}>{item[0]}</option>
+               <option  className="option_lang" value={item[1]}>{item[0]}</option>
               );
             })}
             </select>
           </div>
+          <div id="language_radios">
+            <h1  style={{...pageTheme}}  className="languageHeading">Select Region</h1>
+            <hr />
+            <select onChange={(e)=>{
+                console.log(e.target.value, 'region value')
+                setSearch({...search, region:e.target.value})
+               }} name="language" id="language_select">
+            {regionArr.map((item) => {
+              return (
+               <option  className="option_lang" value={item[1]}>{item[0]}</option>
+              );
+            })}
+            </select>
+          </div>
+          <button
+            style={{
+              ...pageTheme,
+              backgroundColor: "green",
+              fontSize: "1.5rem",
+              color: "white",
+            }}
+            id="searchbtn"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </section>
       
       <Paper

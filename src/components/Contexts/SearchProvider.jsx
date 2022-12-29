@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 const SearchContext = createContext();
 
 function SearchProvider({ children }) {
-    const [search, setSearch] = useState("bitcoin");
+    let [search, setSearch] = useState("bitcoin");
     const handleSearch = (e) => {
         setSearch(e.target.value);
     }
