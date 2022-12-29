@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Paper } from "@mui/material";
 
@@ -8,7 +8,6 @@ import { ThemeContext } from "./Contexts/ContextTheme";
 import Cards from "./Cards";
 
 export default function AdvancedSearch() {
-  
   const [datas, setData] = useState([]);
   const [count, setCount] = useState(0);
   const { theme, setTheme } = useContext(ThemeContext);
@@ -20,24 +19,29 @@ export default function AdvancedSearch() {
     to: "2022-12-27",
     region: "in",
     category: "all",
+    sortBy: "publishedAt",
     language: "all",
   });
-  
-  const [searched, setSearched] = useState({ keyword: "bitcoin",
-  from: "2022-12-27",
-  to: "2022-12-27",
-  region: "in",
-  category: "all",});
-  
+
+  const [searched, setSearched] = useState({
+    keyword: "bitcoin",
+    from: "2022-12-27",
+    to: "2022-12-27",
+    region: "in",
+    category: "all",
+    sortBy: "popularity",
+    language: "all",
+  });
+
   const handleSearch = () => {
     setSearched({ ...search });
   };
   useEffect(() => {
-    console.log(searched, 'searcheddddddddd')
-    console.log(search, 'search')
+    console.log(searched, "searcheddddddddd");
+    console.log(search, "search");
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=${searched['keyword']}&from=${searched["from"]}&to=${searched["to"]}country=uslanguage=${searched['language']}&apiKey=ab3256b8df06417da840cd79b7e986f8`
+        `https://newsapi.org/v2/everything?q=${searched["keyword"]}&from=${searched["from"]}&to=${searched["to"]}language=${searched["language"]}&sortBy=${searched["sortBy"]}&apiKey=ab3256b8df06417da840cd79b7e986f8`
       )
       .then((response) => {
         setData([response.data.articles]);
@@ -49,7 +53,6 @@ export default function AdvancedSearch() {
     count === 0 ? setPageTheme(theme.dark) : setPageTheme(theme.light);
   };
 
-
   let regionArr = [
     ["Argentina", "ar"],
     ["Brazil", "br"],
@@ -57,15 +60,15 @@ export default function AdvancedSearch() {
     ["India", "in"],
     ["USA", "us"],
   ];
-
+  let sortBy = ["popularity", "publishedAt", "relavancy"];
   let languageArr = [
     ["English", "all"],
     ["Spanish", "ar"],
     ["French", "fr"],
     ["Italian", "it"],
     ["Portuguese", "pt"],
-    ["Russian", "ru"]
-    ];
+    ["Russian", "ru"],
+  ];
 
   document.getElementById("root").style = { ...pageTheme };
 
@@ -75,9 +78,7 @@ export default function AdvancedSearch() {
 
       <section className="main" style={{ ...pageTheme }}>
         <h1 id="headingTop">ADVANCED SEARCH</h1>
-        <div style={{ ...pageTheme }} id="searchBtn-container">
-        
-        </div>
+        <div style={{ ...pageTheme }} id="searchBtn-container"></div>
         <div id="hero">
           <label>
             Enter a keyword:
@@ -85,7 +86,9 @@ export default function AdvancedSearch() {
               type="text"
               required
               id="inputSearch"
-              onChange={ (e)=>setSearch({ ...search, keyword: e.target.value })}
+              onChange={(e) =>
+                setSearch({ ...search, keyword: e.target.value })
+              }
               placeholder="Type Something"
             />
           </label>
@@ -109,31 +112,69 @@ export default function AdvancedSearch() {
 
         <section id="wrapper_filters">
           <div id="language_radios">
-            <h1  style={{...pageTheme}}  className="languageHeading">Select Language</h1>
+            <h1 style={{ ...pageTheme }} className="languageHeading">
+              Select Language
+            </h1>
             <hr />
-            <select onChange={(e)=>{
-                console.log(e.target.value, 'language value')
-                setSearch({...search, language:e.target.value})
-               }} name="language" id="language_select">
-            {languageArr.map((item) => {
-              return (
-               <option  className="option_lang" value={item[1]}>{item[0]}</option>
-              );
-            })}
+            <select
+              onChange={(e) => {
+                console.log(e.target.value, "language value");
+                setSearch({ ...search, language: e.target.value });
+              }}
+              name="language"
+              id="language_select"
+            >
+              {languageArr.map((item) => {
+                return (
+                  <option className="option_lang" value={item[1]}>
+                    {item[0]}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div id="language_radios">
-            <h1  style={{...pageTheme}}  className="languageHeading">Select Region</h1>
+            <h1 style={{ ...pageTheme }} className="languageHeading">
+              Select Region
+            </h1>
             <hr />
-            <select onChange={(e)=>{
-                console.log(e.target.value, 'region value')
-                setSearch({...search, region:e.target.value})
-               }} name="language" id="language_select">
-            {regionArr.map((item) => {
-              return (
-               <option  className="option_lang" value={item[1]}>{item[0]}</option>
-              );
-            })}
+            <select
+              onChange={(e) => {
+                console.log(e.target.value, "region value");
+                setSearch({ ...search, region: e.target.value });
+              }}
+              name="language"
+              id="language_select"
+            >
+              {regionArr.map((item) => {
+                return (
+                  <option className="option_lang" value={item[1]}>
+                    {item[0]}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div id="language_radios">
+            <h1 style={{ ...pageTheme }} className="languageHeading">
+              Sort By
+            </h1>
+            <hr />
+            <select
+              onChange={(e) => {
+                console.log(e.target.value, "region value");
+                setSearch({ ...search, region: e.target.value });
+              }}
+              name="language"
+              id="language_select"
+            >
+              {sortBy.map((item) => {
+                return (
+                  <option className="option_lang" value={item}>
+                    {item}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <button
@@ -149,24 +190,24 @@ export default function AdvancedSearch() {
             Search
           </button>
         </section>
-      
-      <Paper
-        style={{
-          ...pageTheme,
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "flex-start",
-          justifyContent: "center",
-        }}
-      >
-        {datas[0] !== undefined
-          ? datas[0].length >= 1
-            ? datas[0].map((item) => {
-                return <Cards item={item} pageTheme={pageTheme} />;
-              })
-            : null
-          : null}
-      </Paper>
+
+        <Paper
+          style={{
+            ...pageTheme,
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            justifyContent: "center",
+          }}
+        >
+          {datas[0] !== undefined
+            ? datas[0].length >= 1
+              ? datas[0].map((item) => {
+                  return <Cards item={item} pageTheme={pageTheme} />;
+                })
+              : null
+            : null}
+        </Paper>
       </section>
     </>
   );
