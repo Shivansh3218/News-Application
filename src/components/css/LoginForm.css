@@ -10,3 +10,13 @@
 .loginForm{
     margin-top: 0;
 }
+#guestLogin{
+    padding: 0.6rem;
+    border-radius: 5px;
+    background-color: #18cc00;
+    color: white;
+    border: none;
+    margin: 1rem;
+    margin-left: 46%;
+    cursor: pointer;
+}

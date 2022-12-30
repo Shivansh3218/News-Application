@@ -27,7 +27,7 @@ function Sports() {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/top-headlines?country=de&category=sports&q=${search}apiKey=ab3256b8df06417da840cd79b7e986f8`
+        `https://newsapi.org/v2/top-headlines?country=de&category=sports&apiKey=ab3256b8df06417da840cd79b7e986f8`
       )
       .then((response) => {
         setData([response.data.articles]);

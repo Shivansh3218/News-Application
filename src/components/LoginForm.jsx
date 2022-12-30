@@ -30,7 +30,7 @@ const LoginForm = () => {
     <video autoPlay loop muted id="myVid">
       <source src={bgVid} type="video/mp4"/>
     </video>
-    <Typography variant="h3" gutterBottom textAlign='center' marginTop='2rem' color='white'>
+    <Typography variant="h3" gutterBottom textAlign='center'marginBottom='10rem' marginTop='2rem' color='white'>
       Welcome to The Developer's News Application
     </Typography>
     <Form
@@ -43,9 +43,7 @@ const LoginForm = () => {
       autoComplete="off"
       style={{width:'400px', margin:'auto'}}
     >
-     <Typography variant="h3" gutterBottom textAlign='center'style={{marginBottom:'10rem'}} marginTop='2rem' color='white'>
-      Login to get latest news world wide
-    </Typography>
+    
       <Form.Item
         label="Email/Username"
         width='auto'
@@ -93,6 +91,7 @@ const LoginForm = () => {
         <Button type="primary" htmlType="submit">
           Login
         </Button>
+        
       </Form.Item>
       <Form.Item
         wrapperCol={{
@@ -105,6 +104,9 @@ const LoginForm = () => {
         </Button>
       </Form.Item>
     </Form>
+    <button  id="guestLogin" onClick={()=>navigate('/MainNews')} htmlType="submit">
+          Guest Login
+        </button>
     </div>
   );
 };
