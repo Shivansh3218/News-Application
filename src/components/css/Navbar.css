@@ -18,7 +18,16 @@ a {
 li {
   list-style: none;
 }
+#text-red{
+  color: red;
+}
 
+#userImg{
+  width: 65%;
+  margin: 10%;
+  height: 30vh;
+  border-radius: 50%;
+}
 /* 
  
 /* navbar style start  */

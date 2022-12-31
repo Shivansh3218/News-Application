@@ -6,8 +6,10 @@ import { Switch, styled, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { SearchContext } from "./Contexts/SearchProvider";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import { Drawer } from "antd";
+
+import '../components/css/Navbar.css'
 
 const { Search } = Input;
 
@@ -75,6 +77,25 @@ const Navbar = ({ handleTheme, pageTheme }) => {
   };
 
   let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  
+  const userImg =   localStorage.getItem('img')
+  const handleImg = (e)=>{
+    const file = e.target.files[0];
+    getBase64(file).then((base64)=>{
+    localStorage['img']= base64;
+        console.log(base64, 'image format changed ')
+    })
+  }
+
+  const getBase64 = (file)=>{
+    return new Promise((res,rej)=>{
+      const reader = new FileReader();
+      reader.onload = ()=>res(reader.result)
+      reader.onabort = (err)=>rej(err)
+      reader.readAsDataURL(file)
+    })
+  }
+
 
   return (
     <>
@@ -87,15 +108,23 @@ const Navbar = ({ handleTheme, pageTheme }) => {
           />
 
           <Drawer
-            style={{ ...pageTheme }}
+            style={{ ...pageTheme,display:'flex', flexDirection:'column' }}
             placement="left"
           
             onClose={onClose}
             open={open}
           >
-            <Typography variant="h4">
-              Welcome <span>{loggedInUser.Name}</span>
+            {
+              loggedInUser.Name==='Guest User'? 
+              
+            <img id="userImg" src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'  alt="" />
+              :
+            <img id="userImg" src={userImg}  alt="" />
+          }
+            <Typography variant="h4" sx={{marginTop:'1rem'}}>
+              Welcome !! <span id="text-red">{loggedInUser.Name}</span>
             </Typography>
+            
             <div
               className="logOut_btn"
               style={{ position: "absolute", bottom: "5%", width: "80%" }}

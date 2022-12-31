@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { UploadOutlined } from "@mui/icons-material";
 
 import bgVid from '../Assets/loginVideo.mp4'
+import { render } from "@testing-library/react";
 
 const { Option } = Select;
 const formItemLayout = {
@@ -75,6 +76,23 @@ const SignUp = () => {
     }
     return e?.fileList;
   };
+  const handleImg = (e)=>{
+    const file = e.target.files[0];
+    getBase64(file).then((base64)=>{
+    localStorage['img']= base64;
+        console.log(base64, 'image format changed ')
+    })
+  }
+
+  const getBase64 = (file)=>{
+    return new Promise((res,rej)=>{
+      const reader = new FileReader();
+      reader.onload = ()=>res(reader.result)
+      reader.onabort = (err)=>rej(err)
+      reader.readAsDataURL(file)
+    })
+  }
+
   
 
   return (
@@ -198,9 +216,11 @@ const SignUp = () => {
         getValueFromEvent={normFile}
         extra="Select a profile Picture"
       >
-        <Upload name="logo" action="/upload.do" listType="picture">
+        {/* <Upload name="logo" action="/upload.do" listType="picture">
           <Button icon={<UploadOutlined/>}>Click to upload</Button>
-        </Upload>
+        </Upload> */}
+
+        <input type="file" name="file" onChange={handleImg} />
       </Form.Item>
         <Form.Item
           name="gender"
